@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controller('/', 'Home\IndexController', ['only' => ['home', 'public', 'mentions', 'settings']]);
+Route::controller('/', 'Home\IndexController');
