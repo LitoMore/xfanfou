@@ -24,7 +24,7 @@
             "Util\\": "util/"
         },
         "files": [
-            "util/helper/Common.php"
+            "util/Helper/Common.php"
         ]
     },
     "autoload-dev": {
