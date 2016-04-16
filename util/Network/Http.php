@@ -43,14 +43,14 @@ class Http
             throw new Exception($errmsg, $errno);
         }
 
-        $statusCode = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
-        $headerSize = curl_getinfo($this->ch, CURLINFO_HEADER_SIZE);
-        $info       = curl_getinfo($this->ch);
+        $status_code = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+        $headerSize  = curl_getinfo($this->ch, CURLINFO_HEADER_SIZE);
+        $info        = curl_getinfo($this->ch);
 
         // return string or false
         $body = substr($response, $headerSize);
 
-        $response = new Response($body, $statusCode, $info);
+        $response = new Response($body, $status_code, $info);
 
         curl_close($this->ch);
 
@@ -83,5 +83,4 @@ class Http
     {
         return $this->request('post', $url, $data);
     }
-
 }
