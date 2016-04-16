@@ -25,12 +25,12 @@ class HttpTest extends TestCase
     public function testRequestBody()
     {
         $r = $this->makeHttp()->post(self::URL . '/echo.php');
-        $this->assertEquals(200, $r->statusCode);
+        $this->assertEquals(200, $r->status_code);
         $this->assertEquals('', $r->body);
         $this->assertEquals('', $r);
 
         $r = $this->makeHttp()->post(self::URL . '/echo.php', ['foo' => 'bar']);
-        $this->assertEquals(200, $r->statusCode);
+        $this->assertEquals(200, $r->status_code);
         $this->assertEquals('foo=bar', $r->body);
         $this->assertEquals('foo=bar', $r);
 
@@ -44,13 +44,13 @@ class HttpTest extends TestCase
         $this->assertEquals('{"a":"b","foo":"bar"}', $r);
 
         $r = $this->makeHttp()->post(self::URL . '/404.php');
-        $this->assertEquals(404, $r->statusCode);
+        $this->assertEquals(404, $r->status_code);
     }
 
     public function testFailedResponse()
     {
         $r = $this->makeHttp()->post(self::URL . '/failure.php', ['foo' => 'bar']);
-        $this->assertEquals(500, $r->statusCode);
+        $this->assertEquals(500, $r->status_code);
         $this->assertEquals('Failure', $r);
     }
 

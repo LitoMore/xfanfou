@@ -17,7 +17,7 @@ class Response
      * The response code
      * @var int
      */
-    public $statusCode;
+    public $status_code;
 
     /**
      * The response info
@@ -27,14 +27,14 @@ class Response
 
     /**
      * @param string $body
-     * @param int $statusCode
+     * @param int $status_code
      * @param array  $info
      */
-    public function __construct($body, $statusCode, $info = [])
+    public function __construct($body, $status_code, $info = [])
     {
-        $this->body       = (string) $body;
-        $this->statusCode = $statusCode;
-        $this->info       = $info;
+        $this->body        = (string) $body;
+        $this->status_code = $status_code;
+        $this->info        = $info;
     }
 
     /**
