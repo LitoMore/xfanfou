@@ -10,22 +10,32 @@
 ## 基本框架
 ### 结构
 ```
-.
-├── app
-│   └── Http
-│   │   ├── Controllers 控制器目录
-│   │   │   └── Home    页面控制器
-│   │   └── routes.php  路由   
-├── config              配置文件
-├── public              站点根目录
-├── resource            视图
-├── util            
-│   ├── api             API方法
-│   ├── helper          通用方法
-│   ├── network         HTTP方法
-│   ├── oauth
-│   └── xauth
-└── .env                Laravel配置文件
+/
+├── app/
+│   └── Http/
+│       ├── Controllers/    控制器目录
+│       │   └── Api/        API控制器
+│       │   └── Home/       页面控制器
+│       └── routes.php      路由
+├── config/                 配置文件
+├── public/                 站点根目录
+├── resource/               视图
+│   └── views/
+│       ├── f7ios/
+│       ├── f7material/
+│       └── kindle/
+├── util/                   业务代码
+│   ├── Auth/
+│   │   ├── Oauth.php
+│   │   └── Xauth.php
+│   ├── Helper/
+│   │   └── Common.php
+│   └── Network/
+│       ├── Api.php
+│       ├── Exception.php
+│       ├── Http.php
+│       └── Response.php
+└── .env
 ```
 
 [1]:https://coding.net/u/angelito/p/xfanfou/git/blob/develop/docs/psr-1.md
