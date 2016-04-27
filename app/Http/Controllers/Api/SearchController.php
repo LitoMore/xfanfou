@@ -13,7 +13,7 @@ class SearchController extends Controller
 {
     public function getPublicTimeline(Request $request)
     {
-        // TODO Api::get('search/public-timeline', $params);
+        // TODO Api::get('search/public_timeline', $params);
     }
 
     public function getUsers(Request $request)
