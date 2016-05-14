@@ -15,4 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('fanfou', 'Auth\FanfouController@index');
+Route::get('fanfou/callback', 'Auth\FanfouController@callback');
+Route::post('fanfou/login', 'Auth\FanfouController@login');
+
+Route::group(['middleware' => 'auth.fanfou'], function () {
+    Route::controller('api/search', 'Api\SearchController');
+    Route::controller('api/photos', 'Api\PhotosController');
+});
+
 Route::controller('/', 'Home\IndexController');

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PhotosController extends Controller
 {
@@ -16,6 +14,12 @@ class PhotosController extends Controller
 
     public function postUpload(Request $request)
     {
-        
+        $status = $request->input('status', 'test' . time());
+
+        $api = new Api;
+        $api->file('photo', $request->file('photo'));
+        $result = $api->photos()->upload(compact('status'));
+
+        return response()->json(json_decode($result->body));
     }
 }
