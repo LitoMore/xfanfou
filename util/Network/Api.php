@@ -105,7 +105,7 @@ class Api
 
     public function __construct()
     {
-        $this->http     = new Http($this->timeout);
+        $this->http     = new Http;
         $this->config   = $config   = config('fanfou');
         $this->domain   = $config['api_url'];
         $this->token    = (new Token())->retrieveToken();
@@ -145,12 +145,10 @@ class Api
     protected function fetch($base_url, $method, array $params = null)
     {
         $auth    = static::$resolver->make($this->token, $this->consumer);
-        $timeout = array_pull($params, 'timeout');
-        if ($timeout !== null) {
-            $this->http->setTimeout($timeout);
-        }
+        $timeout = array_pull($params, 'timeout', $this->timeout);
+        $params  = $auth->encodeParams($base_url, $method, $params);
 
-        $params         = $auth->encodeParams($base_url, $method, $params);
+        $this->http->setTimeout($timeout);
         $this->response = $this->http->{strtolower($method)}($base_url, $params);
 
         if ($this->response->status_code === 200) {

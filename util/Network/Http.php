@@ -23,12 +23,7 @@ class Http
      * timeout
      * @var int
      */
-    private $timeout;
-
-    public function __construct($timeout = 30)
-    {
-        $this->timeout = $timeout;
-    }
+    private $timeout = 30;
 
     public function setTimeout($timeout)
     {
@@ -117,7 +112,7 @@ class Http
      * @param  array|string $args
      * @return Util\Network\Response
      */
-    public function get($url, array $args = null)
+    public function get($url, $args = null)
     {
         return $this->request('get', $url, $args);
     }
@@ -128,7 +123,7 @@ class Http
      * @param  array  $data
      * @return Util\Network\Response
      */
-    public function post($url, array $data = null)
+    public function post($url, array $data = [])
     {
         return $this->request('post', $url, $data);
     }
