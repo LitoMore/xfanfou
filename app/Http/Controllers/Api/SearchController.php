@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Util\Network\Api;
 
-class SearchController extends Controller
+class SearchController extends Abstraction
 {
     protected $q;
 

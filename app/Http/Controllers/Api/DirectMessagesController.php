@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class DirectMessagesController extends Controller
+class DirectMessagesController extends Abstraction
 {
     public function postDestroy(Request $request)
     {

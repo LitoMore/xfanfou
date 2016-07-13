@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class SavedSearchesController extends Controller
+class SavedSearchesController extends Abstraction
 {
     public function postCreate(Request $request)
     {

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Util\Network\Api;
 
-class PhotosController extends Controller
+class PhotosController extends Abstraction
 {
     public function getUserTimeline(Request $request)
     {

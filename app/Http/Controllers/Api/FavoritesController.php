@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class FavoritesController extends Controller
+class FavoritesController extends Abstraction
 {
     public function postDestroy(Request $request)
     {

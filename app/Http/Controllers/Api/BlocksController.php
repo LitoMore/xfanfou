@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class BlocksController extends Controller
+class BlocksController extends Abstraction
 {
     public function getIds(Request $request)
     {
