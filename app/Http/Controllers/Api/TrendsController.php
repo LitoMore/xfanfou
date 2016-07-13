@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class TrendsController extends Controller
+class TrendsController extends Abstraction
 {
     public function getList(Request $request)
     {

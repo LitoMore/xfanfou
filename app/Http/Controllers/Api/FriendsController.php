@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class FriendsController extends Controller
+class FriendsController extends Abstraction
 {
     public function getIds(Request $request)
     {
