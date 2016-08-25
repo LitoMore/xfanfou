@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Util\Network\Api;
+use Library\Api\Search;
 
 class SearchController extends Abstraction
 {
@@ -17,10 +17,9 @@ class SearchController extends Abstraction
 
     public function getPublicTimeline(Request $request)
     {
-        // Same with Api::get('search/public-timeline', $params);
-        $result = Api::search()->publicTimeline(['q' => $this->q]);
+        $body = Search::publicTimeline(['q' => $this->q]);
 
-        return response()->json(json_decode($result->body));
+        return response()->json($body);
     }
 
     /**
@@ -31,9 +30,9 @@ class SearchController extends Abstraction
     public function getUsers(Request $request)
     {
         // 此接口没有返回数据!
-        $result = Api::search()->users(['q' => $this->q]);
+        $body = Search::users(['q' => $this->q]);
 
-        return response()->json(json_decode($result->body));
+        return response()->json($body);
     }
 
     /**
@@ -43,8 +42,8 @@ class SearchController extends Abstraction
      */
     public function getUserTimeline(Request $request)
     {
-        $result = Api::search()->userTimeline(['q' => $this->q]);
+        $body = Search::user_timeline(['q' => $this->q]);
 
-        return response()->json(json_decode($result->body));
+        return response()->json($body);
     }
 }
