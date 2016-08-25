@@ -142,7 +142,7 @@ class Api
      * @param  array|null $params
      * @return Util\Network\Response
      */
-    protected function fetch($base_url, $method, array $params = null)
+    protected function fetch($base_url, $method, array $params = [])
     {
         $auth    = static::$resolver->make($this->token, $this->consumer);
         $timeout = array_pull($params, 'timeout', $this->timeout);
@@ -211,7 +211,7 @@ class Api
      * @param array|null $params
      * @return Util\Auth\Token
      */
-    protected function accessToken(array $params = null)
+    protected function accessToken(array $params = [])
     {
         if ($this->config['auth_mode'] === 'xauth') {
             $this->token->setAccessTokenSecret(null);
