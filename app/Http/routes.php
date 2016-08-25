@@ -20,8 +20,5 @@ Route::get('fanfou/callback', 'Auth\FanfouController@callback');
 Route::post('fanfou/login', 'Auth\FanfouController@login');
 
 Route::group(['middleware' => 'auth.fanfou'], function () {
-    Route::controller('api/search', 'Api\SearchController');
-    Route::controller('api/photos', 'Api\PhotosController');
+    Route::get('search/public_timeline', 'Api\SearchController@getPublicTimeline');
 });
-
-Route::controller('/', 'Home\IndexController');
