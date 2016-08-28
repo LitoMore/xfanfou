@@ -18,11 +18,6 @@ class StatusesController extends Abstraction
         return response()->json($body);
     }
 
-    public function getFriendsTimeline(Request $request)
-    {
-
-    }
-
     public function getHomeTimeline(Request $request)
     {
         $input = $request->all();
@@ -65,21 +60,33 @@ class StatusesController extends Abstraction
 
     public function getFriends(Request $request)
     {
+        $input = $request->all();
+        $body = Statuses::friends($input);
 
+        return response()->json($body);
     }
 
     public function getContextTimeline(Request $request)
     {
+        $input = $request->all();
+        $body = Statuses::context_timeline($input);
 
+        return response()->json($body);
     }
 
     public function getMentions(Request $request)
     {
+        $input = $request->all();
+        $body = Statuses::mentions($input);
 
+        return response()->json($body);
     }
 
     public function getShow(Request $request)
     {
+        $input = $request->all();
+        $body = Statuses::show($input);
 
+        return response()->json($body);
     }
 }
