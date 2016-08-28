@@ -1,9 +1,9 @@
 @extends('m.base')
 @section('html')
     <h2>你在做什么？</h2>
-    <form method="post" action="{{ action('Home\MController@home') }}">
+    <form method="post" action="{{ route('M.postHome') }}">
         <p>
-            <textarea maxlength="140" class="i" name="content" rows="3"></textarea>
+            <textarea maxlength="140" class="i" name="status" rows="3"></textarea>
         </p>
         <p>
             {{ csrf_field() }}
@@ -13,7 +13,8 @@
     </form>
     <h2>
         <strong>最新消息</strong>
-        (<a href="{{ action('Home\MController@home') }}">刷新</a>) | <a href="/mentions">@我的</a>
+        (<a href="{{ route('M.getHome') }}">刷新</a>) |
+        <a href="{{ route('M.mentions') }}">@我的</a>
     </h2>
     @foreach ($homeTimeline as $status)
         <p>
@@ -25,7 +26,13 @@
             <br>
             <span class="t">n 分钟前&nbsp;通过{!! $status->source !!}</span>
             <span class="a">
-
+                <a href="{{ route('M.msg.reply', ['msg_id' => $status->id]) }}">回复</a>
+            </span>
+            <span class="a">
+                <a href="{{ route('M.msg.reply', ['msg_id' => $status->id]) }}">转发</a>
+            </span>
+            <span class="a">
+                <a href="{{ route('M.msg.reply', ['msg_id' => $status->id]) }}">收藏</a>
             </span>
         </p>
     @endforeach
@@ -33,7 +40,7 @@
     <p>热门话题： <a href="">北京折叠</a></p>
     <div id="nav">
         <p class="s">
-            0<a href="{{ action('Home\MController@home') }}" accesskey="0">首页</a>
+            0<a href="" accesskey="0">首页</a>
             1<a href="/lito" accesskey="1">空间</a>
             2<a href="/friends" accesskey="2">关注的人</a>
             7<a href="/privatemsg" accesskey="7">私信</a>
@@ -48,5 +55,4 @@
         <a href="http://m.fanfou.com/autologin.confirm">存为书签</a> | <a href="/logout/fd109fd4">退出</a>
     </p>
     <div id="ft">© 2016 xfanfou.com</div>
-    <p>Powered by LitoMore</p>
 @endsection

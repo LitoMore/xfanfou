@@ -3,13 +3,13 @@ namespace Library\Api;
 
 use Util\Network\Api;
 
-class Statuses
+class Statuses extends Abstraction
 {
     public static function destroy($params = [])
     {
-        $result = Api::statuses()->destroy($params);
+        $response = Api::statuses()->destroy($params);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 
     public static function homeTimeline($params = [])
@@ -18,12 +18,11 @@ class Statuses
             'since_id' => 0,
             'max_id' => 0,
             'count' => 20,
-            'page' => 1
         ];
         $params = array_merge($default, $params);
-        $result = Api::statuses()->home_timeline($params);
+        $response = Api::statuses()->home_timeline($params);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 
     public static function publicTimeline($params = [])
@@ -34,9 +33,9 @@ class Statuses
             'max_id' => 0
         ];
         $params = array_merge($default, $params);
-        $result = Api::statuses()->public_timeline($params);
+        $response = Api::statuses()->public_timeline($params);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 
     public static function replies($params)
@@ -45,30 +44,69 @@ class Statuses
             'since_id' => 0,
             'max_id' => 0,
             'count' => 20,
-            'page' => 1
         ];
         $params = array_merge($default, $params);
-        $result = Api::statuses()->replies($params);
+        $response = Api::statuses()->replies($params);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 
     public static function followers($params)
     {
         $default = [
             'count' => 20,
-            'page' => 1
         ];
         $params = array_merge($default, $params);
-        $result = Api::statuses()->followers($params);
+        $response = Api::statuses()->followers($params);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 
     public static function update($params)
     {
-        $result = Api::statuses()->update($params);
+        $response = Api::statuses()->update($params);
 
-        return json_decode($result->body);
+        return self::output($response);
+    }
+
+    public static function user_timeline($params)
+    {
+        $default = [
+            'since_id' => 0,
+            'max_id' => 0,
+            'count' => 0
+        ];
+        $params = array_merge($default);
+        $response = Api::statuses()->user_timeline($params);
+
+        return self::output($response);
+    }
+
+    public static function friends($params)
+    {
+        $response = Api::statuses()->friends($params);
+
+        return self::output($response);
+    }
+
+    public static function context_timeline($params)
+    {
+        $response = Api::statuses()->context_timeline($params);
+
+        return self::output($response);
+    }
+
+    public static function mentions($params)
+    {
+        $response = Api::statuses()->mentions($params);
+
+        return self::output($response);
+    }
+
+    public static function show($params)
+    {
+        $response = Api::statuses()->show($params);
+
+        return self::output($response);
     }
 }

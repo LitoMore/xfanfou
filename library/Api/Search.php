@@ -3,26 +3,26 @@ namespace Library\Api;
 
 use Util\Network\Api;
 
-class Search
+class Search extends Abstraction
 {
     public static function publicTimeline($qurey = [])
     {
-        $result = Api::search()->publicTimeline($qurey);
+        $response = Api::search()->publicTimeline($qurey);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 
     public static function users($query = [])
     {
-        $result = Api::search()->users($query);
+        $response = Api::search()->users($query);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 
     public static function user_timeline($query = [])
     {
-        $result = Api::search()->user_timeline($query);
+        $response = Api::search()->user_timeline($query);
 
-        return json_decode($result->body);
+        return self::output($response);
     }
 }

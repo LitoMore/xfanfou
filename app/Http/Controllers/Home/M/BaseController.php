@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Home\M;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -12,5 +12,6 @@ class BaseController extends Controller
 
     public function __construct(Request $request)
     {
+
     }
 }

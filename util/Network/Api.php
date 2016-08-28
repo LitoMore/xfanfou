@@ -155,8 +155,7 @@ class Api
             return $this->response;
         }
 
-        $body = json_decode($this->response->body);
-        throw new Exception($body->error, 1);
+        return $this->response;
     }
 
     /**
