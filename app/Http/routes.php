@@ -11,21 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('fanfou', 'Auth\FanfouController@index');
 Route::get('fanfou/callback', 'Auth\FanfouController@callback');
 Route::post('fanfou/login', 'Auth\FanfouController@login');
 
 Route::group([
-    'namespace' => 'Home',
+    'namespace' => 'Home\M',
     'middleware' => 'auth.fanfou',
-    'domain' => 'm.xfanfou.dev'
+    'domain' => 'm.xfanfou.com'
 ], function () {
-    Route::get('home', 'MController@home');
-    Route::post('home', 'MController@home');
+    Route::get('home', 'HomeController@getHome')->name('M.getHome');
+    Route::post('home', 'HomeController@postHome')->name('M.postHome');
+    Route::get('mentions', 'MentionsController@mentions')->name('M.mentions');
+    Route::get('msg.reply/{msg_id}', 'MsgController@reply')->name('M.msg.reply');
+    Route::get('msg.forward/{msg_id}', 'MsgController@forward')->name('M.msg.forward');
 });
 
 Route::group([
@@ -44,6 +44,13 @@ Route::group([
     Route::get('statuses/replies', 'StatusesController@getReplies');
     Route::get('statuses/followers', 'StatusesController@getFollowers');
     Route::post('statuses/update', 'StatusesController@postUpdate');
+    Route::get('statuses/user_timeline', 'StatusesController@getUserTimeline');
+    Route::get('statuses/friends', 'StatusesController@getFriends');
+    Route::get('statuses/context_timeline', 'StatusController@getContextTimeline');
+    Route::get('statuses/mentions', 'StatusesController@getMentions');
+    Route::get('statuses/show', 'StatusesController@getShow');
 });
 
-
+Route::get('/', function () {
+    return view('welcome');
+});
