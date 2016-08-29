@@ -9,6 +9,6 @@ class Followers extends Abstraction
     {
         $response = Api::followers()->ids($params);
 
-        return self::output($params);
+        return self::output($response);
     }
 }
