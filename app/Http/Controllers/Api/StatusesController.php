@@ -15,7 +15,7 @@ class StatusesController extends Abstraction
         $input = $request->only(['id']);
         $body = Statuses::destroy($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getHomeTimeline(Request $request)
@@ -23,7 +23,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::homeTimeline($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getPublicTimeline(Request $request)
@@ -31,7 +31,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::publicTimeline($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getReplies(Request $request)
@@ -39,7 +39,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::replies($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getFollowers(Request $request)
@@ -47,7 +47,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::followers($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function postUpdate(Request $request)
@@ -55,7 +55,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::update($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getFriends(Request $request)
@@ -63,7 +63,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::friends($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getContextTimeline(Request $request)
@@ -71,7 +71,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::context_timeline($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getMentions(Request $request)
@@ -79,7 +79,7 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::mentions($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     public function getShow(Request $request)
@@ -87,6 +87,6 @@ class StatusesController extends Abstraction
         $input = $request->all();
         $body = Statuses::show($input);
 
-        return response()->json($body);
+        return self::output($body);
     }
 }

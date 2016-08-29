@@ -9,9 +9,8 @@ use App\Http\Controllers\Controller;
 
 class Abstraction extends Controller
 {
-    protected function output($data)
+    protected static function output($data)
     {
-        $code = ['code' => '0'];
-        return response()->json(array_merge($code, $data));
+        return response()->json($data);
     }
 }
