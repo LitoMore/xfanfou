@@ -4,23 +4,24 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Util\Network\Api;
+use Library\Api\Photos;
 
 class PhotosController extends Abstraction
 {
     public function getUserTimeline(Request $request)
     {
+        $input = $request->all();
+        $body = Photos::user_timeline($input);
 
+        return self::output($body);
     }
 
     public function postUpload(Request $request)
     {
-        $status = $request->input('status', 'test' . time());
+        $file = $request->file('photo');
+        $params = $request->all();
+        $body = Photos::upload($file, $params);
 
-        $api = new Api;
-        $api->file('photo', $request->file('photo'));
-        $result = $api->photos()->upload(compact('status'));
-
-        return response()->json(json_decode($result->body));
+        return self::output($body);
     }
 }

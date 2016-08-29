@@ -19,7 +19,7 @@ class SearchController extends Abstraction
     {
         $body = Search::publicTimeline(['q' => $this->q]);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     /**
@@ -32,7 +32,7 @@ class SearchController extends Abstraction
         // 此接口没有返回数据!
         $body = Search::users(['q' => $this->q]);
 
-        return response()->json($body);
+        return self::output($body);
     }
 
     /**
@@ -44,6 +44,6 @@ class SearchController extends Abstraction
     {
         $body = Search::user_timeline(['q' => $this->q]);
 
-        return response()->json($body);
+        return self::output($body);
     }
 }
