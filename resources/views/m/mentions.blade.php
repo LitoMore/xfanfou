@@ -25,7 +25,17 @@
             <br>
             <span class="t">n 分钟前&nbsp;通过{!! $status->source !!}</span>
             <span class="a">
-
+                <a href="{{ route('M.msg.reply', ['msg_id' => $status->id]) }}">回复</a>
+            </span>
+            <span class="a">
+                <a href="{{ route('M.msg.forward', ['msg_id' => $status->id]) }}">转发</a>
+            </span>
+            <span class="a">
+                @if (!$status->favorited)
+                    <a href="{{ route('M.msg.favorite.add', ['msg_id' => $status->id]) }}">收藏</a>
+                @else
+                    <a href="{{ route('M.msg.favorite.del', ['msg_id' => $status->id]) }}">取消</a>
+                @endif
             </span>
         </p>
     @endforeach

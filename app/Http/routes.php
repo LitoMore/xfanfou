@@ -21,11 +21,15 @@ Route::group([
     'middleware' => 'auth.fanfou',
     'domain' => 'm.xfanfou.com'
 ], function () {
+    Route::get('login', 'LoginController@getLogin')->name('M.getLogin');
     Route::get('home', 'HomeController@getHome')->name('M.getHome');
     Route::post('home', 'HomeController@postHome')->name('M.postHome');
     Route::get('mentions', 'MentionsController@mentions')->name('M.mentions');
     Route::get('msg.reply/{msg_id}', 'MsgController@reply')->name('M.msg.reply');
     Route::get('msg.forward/{msg_id}', 'MsgController@forward')->name('M.msg.forward');
+    Route::get('msg.del/{msg_id}', 'MsgController@del')->name('M.msg.del');
+    Route::get('msg.favorite.add/{msg_id}', 'MsgController@favoriteAdd')->name('M.msg.favorite.add');
+    Route::get('msg.favorite.del/{msg_id}', 'MsgController@favoriteDel')->name('M.msg.favorite.del');
 });
 
 Route::group([
