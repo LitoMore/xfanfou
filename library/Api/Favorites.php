@@ -5,11 +5,10 @@ use Util\Network\Api;
 
 class Favorites extends Abstraction
 {
-    public static function destroy($params)
+    public static function destroy($msg_id, $params)
     {
-        $response = Api::favorites()->destroy($params);
-
-        return self::output($response);
+        $api = new Api;
+        $response = $api->post('http://api.fanfou.com/favorites/destroy/' . $msg_id . '.json', $params);
     }
 
     public static function id($params)
@@ -19,9 +18,10 @@ class Favorites extends Abstraction
         return self::output($response);
     }
 
-    public static function create($params)
+    public static function create($msg_id, $params)
     {
-        $response = Api::favorites()->create($params);
+        $api = new Api;
+        $response = $api->post('http://api.fanfou.com/favorites/create/' . $msg_id . '.json', $params);
 
         return self::output($response);
     }
