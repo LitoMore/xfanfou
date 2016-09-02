@@ -13,18 +13,17 @@ class MentionsController extends BaseController
     public function mentions()
     {
         $mentions = Api\Statuses::mentions([
-            'count' => 15,
-            'format' => 'html'
+            'count' => 15
         ]);
-        $msgStatus = null;
+        $this->msg = \Session::get('msg');
 
         if ($mentions['code'] != 0) {
-            $msgStatus = $mentions['error'];
+            $this->msg = $mentions['error'];
         }
 
         return view('m.mentions')->with([
             'mentions' => $mentions['content'],
-            'msgStatus' => $msgStatus
+            'msg' => $this->msg
         ]);
     }
 }

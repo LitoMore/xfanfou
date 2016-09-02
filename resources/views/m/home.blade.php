@@ -7,7 +7,6 @@
         </p>
         <p>
             {{ csrf_field() }}
-            <input type="hidden" name="action" value="msg.post">
             <input type="submit" value="发送">
         </p>
     </form>
@@ -16,6 +15,7 @@
         (<a href="{{ route('M.getHome') }}">刷新</a>) |
         <a href="{{ route('M.mentions') }}">@我的</a>
     </h2>
+    {{-- timeline --}}
     @foreach ($homeTimeline as $status)
         <p>
             <a href="{{ $status->user->id  }}" class="p">{{ $status->user->name }}</a>
@@ -25,34 +25,43 @@
             @endif
             <br>
             <span class="t">n 分钟前&nbsp;通过{!! $status->source !!}</span>
-            <span class="a">
+            @if ($status->is_self)
+                <span class="a">
+                @if (!$status->favorited)
+                        <a href="{{ route('M.msg.favorite.add', ['msg_id' => $status->id]) }}">收藏</a>
+                    @else
+                        <a href="{{ route('M.msg.favorite.del', ['msg_id' => $status->id]) }}">取消</a>
+                    @endif
+            </span>
+                <span class="a">
+                <a href="{{ route('M.msg.forward', ['msg_id' => $status->id]) }}">转发</a>
+            </span>
+                <span class="a">
+                    <a href="{{ route('M.msg.del', ['msg_id' => $status->id]) }}">删除</a>
+                </span>
+            @else
+                <span class="a">
                 <a href="{{ route('M.msg.reply', ['msg_id' => $status->id]) }}">回复</a>
             </span>
-            <span class="a">
-                <a href="{{ route('M.msg.reply', ['msg_id' => $status->id]) }}">转发</a>
+                <span class="a">
+                <a href="{{ route('M.msg.forward', ['msg_id' => $status->id]) }}">转发</a>
             </span>
-            <span class="a">
-                <a href="{{ route('M.msg.reply', ['msg_id' => $status->id]) }}">收藏</a>
+                <span class="a">
+                @if (!$status->favorited)
+                        <a href="{{ route('M.msg.favorite.add', ['msg_id' => $status->id]) }}">收藏</a>
+                    @else
+                        <a href="{{ route('M.msg.favorite.del', ['msg_id' => $status->id]) }}">取消</a>
+                    @endif
             </span>
+            @endif
         </p>
     @endforeach
+    {{--/ timeline --}}
     <p>6<a href="/home/p.2" accesskey="6">下页</a></p>
     <p>热门话题： <a href="">北京折叠</a></p>
-    <div id="nav">
-        <p class="s">
-            0<a href="" accesskey="0">首页</a>
-            1<a href="/lito" accesskey="1">空间</a>
-            2<a href="/friends" accesskey="2">关注的人</a>
-            7<a href="/privatemsg" accesskey="7">私信</a>
-            <br>
-            3<a href="/browse" accesskey="3">随便看看</a>
-            8<a href="/photo.upload" accesskey="8">发照片</a>
-            9<a href="/search" accesskey="9">搜索</a>
-        </p>
-    </div>
+    @include('m.layout.nav')
     <br>
     <p>
         <a href="http://m.fanfou.com/autologin.confirm">存为书签</a> | <a href="/logout/fd109fd4">退出</a>
     </p>
-    <div id="ft">© 2016 xfanfou.com</div>
 @endsection
