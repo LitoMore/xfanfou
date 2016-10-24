@@ -11,10 +11,10 @@
     <a href="{{ route('M.getHome') }}">
         <img src="http://static.fanfou.com/i/fanfou.gif"/>
     </a>
-    @if (isset($msg))
-        <p class="n">{{$msg}}</p>
-    @endif
 </h1>
+@if (isset($msg))
+    <p class="n">{{$msg}}</p>
+@endif
 @yield('html')
 @include('m.layout.footer')
 @yield('js')

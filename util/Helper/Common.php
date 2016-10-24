@@ -1,25 +1,48 @@
 <?php
-
-/**
- * 配置静态资源路径
- */
-if (!function_exists("assets")) {
-    function assets($path)
+// 获取消息中的所有@
+if (!function_exists("getAts")) {
+    function getAts($str, $self = '')
     {
-        if (!App::environment("production")) {
-            return asset($path, false);
+        // 替换
+        $str = getStatusText($str);
+
+        // 获取所有@
+        $partten = '/(@[\w.\x{4e00}-\x{9fa5}]+){1,}/u';
+        $result = preg_match_all($partten, $str, $matches);
+        $ats = str_replace($self, '', implode(' ', array_unique($matches[0])) . ' ');
+
+        return $ats;
+    }
+}
+
+// 获取不带 html 的消息内容
+if (!function_exists("getStatusText")) {
+    function getStatusText($str)
+    {
+        $str = preg_replace('/<a href="http:\/\/fanfou.com\/[^"#>]+" class="former">/', '', $str);
+        $str = preg_replace('/<\/a>/', '', $str);
+
+        return $str;
+    }
+}
+
+// 获取 timeline 消息已过去时间
+if (!function_exists("getTimelineStamp")) {
+    function getTimelineStamp($timestamp)
+    {
+        $passed = strtotime('now') - strtotime($timestamp);
+        if ($passed < 60) {
+            return $passed . '秒前';
         }
-        static $cdn = null;
-        static $mainfest = null;
-        if (is_null($cdn)) {
-            $cdn = config('services.cdn');
+        if ($passed < 3600) {
+            return ceil($passed / 60) . '分钟前';
         }
-        if (is_null($mainfest)) {
-            $manifest = json_decode(file_get_contents(public_path('build/rev-manifest.json')), true);
+        if ($passed < 86400) {
+            return ceil($passed / 3600) . '小时前';
         }
-        if (!isset($manifest[$path])) {
-            throw new InvalidArgumentException("File {$path} not defined in asset manifest.");
+        if ($passed < 2592000) {
+            return ceil($passed / 86400) . '个月前';
         }
-        return $cdn . '/' . $manifest[$path];
+        return '很久以前';
     }
 }

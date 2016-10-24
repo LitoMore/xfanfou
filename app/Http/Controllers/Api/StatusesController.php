@@ -58,6 +58,14 @@ class StatusesController extends Abstraction
         return self::output($body);
     }
 
+    public function getUserTimeline(Request $request)
+    {
+        $input = $request->all();
+        $body = Statuses::user_timeline($input);
+
+        return self::output($body);
+    }
+
     public function getFriends(Request $request)
     {
         $input = $request->all();
