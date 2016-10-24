@@ -1,14 +1,16 @@
 @extends('m.base')
 @section('html')
-    <form method="post" action="/home">
+    <form method="post" action="{{ url()->action('Auth\FanfouController@login') }}">
         <p>Email或手机号：</p>
-        <p><input class="i" tabindex="1" type="text" name="loginname" value=""/>
+        <p><input class="i" tabindex="1" type="text" name="username" value=""/>
         </p>
         <p>密码：</p>
-        <p><input class="i" tabindex="2" type="password" name="loginpass" value=""/></p>
-        <p><input tabindex="9" type="checkbox" name="auto_login" value="on" checked="checked"/> 下次自动登录</p>
-        <p><input type="hidden" name="action" value="login"/><input type="hidden" name="token" value="6bfe2716"/><input
-                    tabindex="10" type="submit" value="登录"/></p>
+        <p><input class="i" tabindex="2" type="password" name="password" value=""/></p>
+        {{--<p><input tabindex="9" type="checkbox" name="auto_login" value="on" checked="checked"/> 下次自动登录</p>--}}
+        <p>
+            {{ csrf_field() }}
+            <input tabindex="10" type="submit" value="登录"/>
+        </p>
     </form>
     <p>没有帐号？<a href="/register">免费注册</a></p>
     <p>或者<a href="/browse">随便看看</a></p>

@@ -18,17 +18,13 @@ class MsgController extends BaseController
             return redirect()->intended(route('M.getHome'));
         }
 
-        $show = Api\Statuses::show(['id' => $msg_id]);
         $this->msg = \Session::get('msg');
-
-        if ($show['code'] != 0) {
-            $this->msg = $show['error'];
-        }
+        $stat = \Session::get('stat');
 
         return view('m.msg_reply')->with([
-            'status' => $show['content'],
             'msg_id' => $msg_id,
-            'msg' => $this->msg
+            'msg' => $this->msg,
+            'stat' => $stat
         ]);
     }
 
@@ -40,17 +36,13 @@ class MsgController extends BaseController
             return redirect()->intended(route('M.getHome'));
         }
 
-        $show = Api\Statuses::show(['id' => $msg_id]);
         $this->msg = \Session::get('msg');
-
-        if ($show['code'] != 0) {
-            $this->msg = $show['error'];
-        }
+        $stat = \Session::get('stat');
 
         return view('m.msg_forward')->with([
-            'status' => $show['content'],
             'msg_id' => $msg_id,
-            'msg' => $this->msg
+            'msg' => $this->msg,
+            'stat' => $stat
         ]);
     }
 

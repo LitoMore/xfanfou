@@ -76,8 +76,9 @@ class Statuses extends Abstraction
             'max_id' => 0,
             'count' => 0
         ];
-        $params = array_merge($default);
+        $params = array_merge($default, $params);
         $response = Api::statuses()->user_timeline($params);
+
 
         return self::output($response);
     }

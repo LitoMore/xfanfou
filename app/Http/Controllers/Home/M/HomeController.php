@@ -10,10 +10,17 @@ use Library\Api;
 
 class HomeController extends BaseController
 {
-    public function getHome()
+    public function getIndex()
+    {
+        return view('m.index');
+    }
+
+    public function getHome($page = 1)
     {
         $home_timeline = Api\Statuses::homeTimeline([
-            'count' => 15
+            'count' => 15,
+            'page' => $page,
+            'format' => 'html'
         ]);
         $this->msg = \Session::get('msg');
 
@@ -21,10 +28,23 @@ class HomeController extends BaseController
             $this->msg = $home_timeline['error'];
         }
 
+        // 存储每条消息需要@的人
+        $stat = [];
+        foreach ($home_timeline['content'] as $status) {
+            $stat[$status->id] = [
+                'text' => getStatusText($status->text),
+                'ats' => getAts('@' . $status->user->name . ' ' . $status->text),
+                'name' => $status->user->name
+            ];
+        }
+        \Session::set('stat', $stat);
+
         return view('m.home')->with([
             'title' => '首页',
+            'page' => $page,
             'homeTimeline' => $home_timeline['content'],
-            'msg' => $this->msg
+            'msg' => $this->msg,
+            'notification' => $this->getNotification()
         ]);
     }
 

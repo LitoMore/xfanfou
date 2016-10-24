@@ -24,12 +24,14 @@ class FanfouController extends Controller
      */
     public function index(Request $request)
     {
-        if ($this->auth_mode === 'xauth') {
+        if ($this->auth_mode === 'xauth' && $request->getHost() === 'm.xfanfou.com') {
+            return view('m.index');
+        } else {
             return view('f7ios.login');
         }
 
         $token = Api::requestToken();
-        $authorize_url   = Api::getAuthorizationUri(
+        $authorize_url = Api::getAuthorizationUri(
             $token->getRequestToken(),
             url()->action('Auth\FanfouController@callback')
         );
@@ -48,7 +50,7 @@ class FanfouController extends Controller
         if (strpos($request->input('username'), '@') !== false) {
             $username = 'required|email';
         } else {
-            $username = ['required', 'regex:/^(13[0-9]|14[57]|15[012356789]|17[0678]|18[0-9])[0-9]{8}$/'];
+            $username = ['required', 'regex:/[\w.\x{4e00}-\x{9fa5}]+$/u'];
         }
         $password = 'required|string';
 
@@ -61,7 +63,7 @@ class FanfouController extends Controller
 
     /**
      * 授权返回页面
-     * @param  Request  $request
+     * @param  Request $request
      * @return Util\Network\Response
      */
     public function callback(Request $request)
@@ -96,6 +98,6 @@ class FanfouController extends Controller
             return redirect($url);
         }
 
-        return Api::account()->verifyCredentials();
+        return response()->json(json_decode(Api::account()->verifyCredentials()));
     }
 }
